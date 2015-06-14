@@ -14,7 +14,6 @@
         <itemPath>pic32_freeRTOS/task.h</itemPath>
         <itemPath>pic32_freeRTOS/ISR_Support.h</itemPath>
         <itemPath>pic32_freeRTOS/queue.h</itemPath>
-        <itemPath>serial.h</itemPath>
         <itemPath>pic32_freeRTOS/event_groups.h</itemPath>
         <itemPath>pic32_freeRTOS/mpu_wrappers.h</itemPath>
         <itemPath>pic32_freeRTOS/semphr.h</itemPath>
@@ -26,6 +25,7 @@
       <itemPath>pic32_freeRTOS/ConfigPerformance.h</itemPath>
       <itemPath>pic32_freeRTOS/partest.h</itemPath>
       <itemPath>MECH_IO_helper.h</itemPath>
+      <itemPath>serial.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -47,7 +47,7 @@
       <itemPath>pic32_freeRTOS/ConfigPerformance.c</itemPath>
       <itemPath>pic32_freeRTOS/ParTest_Explorer16.c</itemPath>
       <itemPath>pic32_freeRTOS/main_blinky.c</itemPath>
-      <itemPath>mainTutorial.c</itemPath>
+      <itemPath>mainTutorial_ch1_ex7.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
