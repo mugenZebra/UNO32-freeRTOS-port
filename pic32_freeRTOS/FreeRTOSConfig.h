@@ -71,7 +71,6 @@
 #define FREERTOS_CONFIG_H
 
 #include <p32xxxx.h>
-#include <xc.h>
 
 /*-----------------------------------------------------------
  * Application specific definitions.

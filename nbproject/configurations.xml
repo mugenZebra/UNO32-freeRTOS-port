@@ -4,25 +4,28 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>pic32_freeRTOS/FreeRTOS.h</itemPath>
-      <itemPath>pic32_freeRTOS/ISR_Support.h</itemPath>
-      <itemPath>pic32_freeRTOS/StackMacros.h</itemPath>
-      <itemPath>pic32_freeRTOS/croutine.h</itemPath>
-      <itemPath>pic32_freeRTOS/deprecated_definitions.h</itemPath>
-      <itemPath>pic32_freeRTOS/event_groups.h</itemPath>
-      <itemPath>pic32_freeRTOS/list.h</itemPath>
-      <itemPath>pic32_freeRTOS/mpu_wrappers.h</itemPath>
-      <itemPath>pic32_freeRTOS/portable.h</itemPath>
-      <itemPath>pic32_freeRTOS/portmacro.h</itemPath>
-      <itemPath>pic32_freeRTOS/projdefs.h</itemPath>
-      <itemPath>pic32_freeRTOS/queue.h</itemPath>
-      <itemPath>pic32_freeRTOS/semphr.h</itemPath>
-      <itemPath>pic32_freeRTOS/task.h</itemPath>
-      <itemPath>pic32_freeRTOS/timers.h</itemPath>
+      <logicalFolder name="f1" displayName="FreeRTOS headers" projectFiles="true">
+        <itemPath>pic32_freeRTOS/FreeRTOS.h</itemPath>
+        <itemPath>pic32_freeRTOS/StackMacros.h</itemPath>
+        <itemPath>pic32_freeRTOS/list.h</itemPath>
+        <itemPath>pic32_freeRTOS/portmacro.h</itemPath>
+        <itemPath>pic32_freeRTOS/portable.h</itemPath>
+        <itemPath>pic32_freeRTOS/croutine.h</itemPath>
+        <itemPath>pic32_freeRTOS/task.h</itemPath>
+        <itemPath>pic32_freeRTOS/ISR_Support.h</itemPath>
+        <itemPath>MECH_IO_helper.h</itemPath>
+        <itemPath>pic32_freeRTOS/queue.h</itemPath>
+        <itemPath>serial.h</itemPath>
+        <itemPath>pic32_freeRTOS/event_groups.h</itemPath>
+        <itemPath>pic32_freeRTOS/mpu_wrappers.h</itemPath>
+        <itemPath>pic32_freeRTOS/semphr.h</itemPath>
+        <itemPath>pic32_freeRTOS/projdefs.h</itemPath>
+        <itemPath>pic32_freeRTOS/timers.h</itemPath>
+        <itemPath>pic32_freeRTOS/deprecated_definitions.h</itemPath>
+      </logicalFolder>
       <itemPath>pic32_freeRTOS/FreeRTOSConfig.h</itemPath>
-      <itemPath>serial.h</itemPath>
-      <itemPath>MECH_IO_helper.h</itemPath>
       <itemPath>pic32_freeRTOS/ConfigPerformance.h</itemPath>
+      <itemPath>pic32_freeRTOS/partest.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -31,15 +34,20 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>pic32_freeRTOS/heap_1.c</itemPath>
-      <itemPath>pic32_freeRTOS/list.c</itemPath>
-      <itemPath>pic32_freeRTOS/port.c</itemPath>
-      <itemPath>pic32_freeRTOS/queue.c</itemPath>
-      <itemPath>pic32_freeRTOS/tasks.c</itemPath>
-      <itemPath>pic32_freeRTOS/timers.c</itemPath>
-      <itemPath>pic32_freeRTOS/port_asm.S</itemPath>
-      <itemPath>main.c</itemPath>
-      <itemPath>serial.c</itemPath>
+      <logicalFolder name="f1" displayName="FreeRTOS sources" projectFiles="true">
+        <itemPath>pic32_freeRTOS/heap_1.c</itemPath>
+        <itemPath>pic32_freeRTOS/list.c</itemPath>
+        <itemPath>pic32_freeRTOS/port.c</itemPath>
+        <itemPath>pic32_freeRTOS/port_asm.S</itemPath>
+        <itemPath>pic32_freeRTOS/queue.c</itemPath>
+        <itemPath>serial.c</itemPath>
+        <itemPath>pic32_freeRTOS/tasks.c</itemPath>
+        <itemPath>pic32_freeRTOS/timers.c</itemPath>
+      </logicalFolder>
+      <itemPath>pic32_freeRTOS/ConfigPerformance.c</itemPath>
+      <itemPath>pic32_freeRTOS/ParTest_Explorer16.c</itemPath>
+      <itemPath>pic32_freeRTOS/main.c</itemPath>
+      <itemPath>pic32_freeRTOS/main_blinky.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

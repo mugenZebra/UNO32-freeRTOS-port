@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=pic32_freeRTOS/heap_1.c pic32_freeRTOS/list.c pic32_freeRTOS/port.c pic32_freeRTOS/queue.c pic32_freeRTOS/tasks.c pic32_freeRTOS/timers.c pic32_freeRTOS/port_asm.S main.c serial.c
+SOURCEFILES_QUOTED_IF_SPACED=pic32_freeRTOS/heap_1.c pic32_freeRTOS/list.c pic32_freeRTOS/port.c pic32_freeRTOS/port_asm.S pic32_freeRTOS/queue.c serial.c pic32_freeRTOS/tasks.c pic32_freeRTOS/timers.c pic32_freeRTOS/ConfigPerformance.c pic32_freeRTOS/ParTest_Explorer16.c pic32_freeRTOS/main.c pic32_freeRTOS/main_blinky.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/pic32_freeRTOS/heap_1.o ${OBJECTDIR}/pic32_freeRTOS/list.o ${OBJECTDIR}/pic32_freeRTOS/port.o ${OBJECTDIR}/pic32_freeRTOS/queue.o ${OBJECTDIR}/pic32_freeRTOS/tasks.o ${OBJECTDIR}/pic32_freeRTOS/timers.o ${OBJECTDIR}/pic32_freeRTOS/port_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/serial.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/pic32_freeRTOS/heap_1.o.d ${OBJECTDIR}/pic32_freeRTOS/list.o.d ${OBJECTDIR}/pic32_freeRTOS/port.o.d ${OBJECTDIR}/pic32_freeRTOS/queue.o.d ${OBJECTDIR}/pic32_freeRTOS/tasks.o.d ${OBJECTDIR}/pic32_freeRTOS/timers.o.d ${OBJECTDIR}/pic32_freeRTOS/port_asm.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/serial.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/pic32_freeRTOS/heap_1.o ${OBJECTDIR}/pic32_freeRTOS/list.o ${OBJECTDIR}/pic32_freeRTOS/port.o ${OBJECTDIR}/pic32_freeRTOS/port_asm.o ${OBJECTDIR}/pic32_freeRTOS/queue.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/pic32_freeRTOS/tasks.o ${OBJECTDIR}/pic32_freeRTOS/timers.o ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o ${OBJECTDIR}/pic32_freeRTOS/main.o ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/pic32_freeRTOS/heap_1.o.d ${OBJECTDIR}/pic32_freeRTOS/list.o.d ${OBJECTDIR}/pic32_freeRTOS/port.o.d ${OBJECTDIR}/pic32_freeRTOS/port_asm.o.d ${OBJECTDIR}/pic32_freeRTOS/queue.o.d ${OBJECTDIR}/serial.o.d ${OBJECTDIR}/pic32_freeRTOS/tasks.o.d ${OBJECTDIR}/pic32_freeRTOS/timers.o.d ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d ${OBJECTDIR}/pic32_freeRTOS/main.o.d ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/pic32_freeRTOS/heap_1.o ${OBJECTDIR}/pic32_freeRTOS/list.o ${OBJECTDIR}/pic32_freeRTOS/port.o ${OBJECTDIR}/pic32_freeRTOS/queue.o ${OBJECTDIR}/pic32_freeRTOS/tasks.o ${OBJECTDIR}/pic32_freeRTOS/timers.o ${OBJECTDIR}/pic32_freeRTOS/port_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/serial.o
+OBJECTFILES=${OBJECTDIR}/pic32_freeRTOS/heap_1.o ${OBJECTDIR}/pic32_freeRTOS/list.o ${OBJECTDIR}/pic32_freeRTOS/port.o ${OBJECTDIR}/pic32_freeRTOS/port_asm.o ${OBJECTDIR}/pic32_freeRTOS/queue.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/pic32_freeRTOS/tasks.o ${OBJECTDIR}/pic32_freeRTOS/timers.o ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o ${OBJECTDIR}/pic32_freeRTOS/main.o ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o
 
 # Source Files
-SOURCEFILES=pic32_freeRTOS/heap_1.c pic32_freeRTOS/list.c pic32_freeRTOS/port.c pic32_freeRTOS/queue.c pic32_freeRTOS/tasks.c pic32_freeRTOS/timers.c pic32_freeRTOS/port_asm.S main.c serial.c
+SOURCEFILES=pic32_freeRTOS/heap_1.c pic32_freeRTOS/list.c pic32_freeRTOS/port.c pic32_freeRTOS/port_asm.S pic32_freeRTOS/queue.c serial.c pic32_freeRTOS/tasks.c pic32_freeRTOS/timers.c pic32_freeRTOS/ConfigPerformance.c pic32_freeRTOS/ParTest_Explorer16.c pic32_freeRTOS/main.c pic32_freeRTOS/main_blinky.c
 
 
 CFLAGS=
@@ -129,6 +129,12 @@ ${OBJECTDIR}/pic32_freeRTOS/queue.o: pic32_freeRTOS/queue.c  nbproject/Makefile-
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/queue.o 
 	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/queue.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/queue.o pic32_freeRTOS/queue.c   
 	
+${OBJECTDIR}/serial.o: serial.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/serial.o.d 
+	@${RM} ${OBJECTDIR}/serial.o 
+	@${FIXDEPS} "${OBJECTDIR}/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/serial.o.d" -o ${OBJECTDIR}/serial.o serial.c   
+	
 ${OBJECTDIR}/pic32_freeRTOS/tasks.o: pic32_freeRTOS/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/tasks.o.d 
@@ -141,17 +147,29 @@ ${OBJECTDIR}/pic32_freeRTOS/timers.o: pic32_freeRTOS/timers.c  nbproject/Makefil
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/timers.o 
 	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/timers.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/timers.o pic32_freeRTOS/timers.c   
 	
-${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
+${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o: pic32_freeRTOS/ConfigPerformance.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o pic32_freeRTOS/ConfigPerformance.c   
 	
-${OBJECTDIR}/serial.o: serial.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/serial.o.d 
-	@${RM} ${OBJECTDIR}/serial.o 
-	@${FIXDEPS} "${OBJECTDIR}/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/serial.o.d" -o ${OBJECTDIR}/serial.o serial.c   
+${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o: pic32_freeRTOS/ParTest_Explorer16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o pic32_freeRTOS/ParTest_Explorer16.c   
+	
+${OBJECTDIR}/pic32_freeRTOS/main.o: pic32_freeRTOS/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/main.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/main.o pic32_freeRTOS/main.c   
+	
+${OBJECTDIR}/pic32_freeRTOS/main_blinky.o: pic32_freeRTOS/main_blinky.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o pic32_freeRTOS/main_blinky.c   
 	
 else
 ${OBJECTDIR}/pic32_freeRTOS/heap_1.o: pic32_freeRTOS/heap_1.c  nbproject/Makefile-${CND_CONF}.mk
@@ -178,6 +196,12 @@ ${OBJECTDIR}/pic32_freeRTOS/queue.o: pic32_freeRTOS/queue.c  nbproject/Makefile-
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/queue.o 
 	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/queue.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/queue.o pic32_freeRTOS/queue.c   
 	
+${OBJECTDIR}/serial.o: serial.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/serial.o.d 
+	@${RM} ${OBJECTDIR}/serial.o 
+	@${FIXDEPS} "${OBJECTDIR}/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/serial.o.d" -o ${OBJECTDIR}/serial.o serial.c   
+	
 ${OBJECTDIR}/pic32_freeRTOS/tasks.o: pic32_freeRTOS/tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/tasks.o.d 
@@ -190,17 +214,29 @@ ${OBJECTDIR}/pic32_freeRTOS/timers.o: pic32_freeRTOS/timers.c  nbproject/Makefil
 	@${RM} ${OBJECTDIR}/pic32_freeRTOS/timers.o 
 	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/timers.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/timers.o pic32_freeRTOS/timers.c   
 	
-${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
+${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o: pic32_freeRTOS/ConfigPerformance.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/ConfigPerformance.o pic32_freeRTOS/ConfigPerformance.c   
 	
-${OBJECTDIR}/serial.o: serial.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/serial.o.d 
-	@${RM} ${OBJECTDIR}/serial.o 
-	@${FIXDEPS} "${OBJECTDIR}/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/serial.o.d" -o ${OBJECTDIR}/serial.o serial.c   
+${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o: pic32_freeRTOS/ParTest_Explorer16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/ParTest_Explorer16.o pic32_freeRTOS/ParTest_Explorer16.c   
+	
+${OBJECTDIR}/pic32_freeRTOS/main.o: pic32_freeRTOS/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/main.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/main.o pic32_freeRTOS/main.c   
+	
+${OBJECTDIR}/pic32_freeRTOS/main_blinky.o: pic32_freeRTOS/main_blinky.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/pic32_freeRTOS 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d 
+	@${RM} ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o 
+	@${FIXDEPS} "${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -O1 -Wall -MMD -MF "${OBJECTDIR}/pic32_freeRTOS/main_blinky.o.d" -o ${OBJECTDIR}/pic32_freeRTOS/main_blinky.o pic32_freeRTOS/main_blinky.c   
 	
 endif
 

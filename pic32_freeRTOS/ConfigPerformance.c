@@ -75,6 +75,8 @@
 
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
+#include <xc.h>
+#include <plib.h>
 
 /* Demo includes. */
 #include "ConfigPerformance.h"
@@ -166,7 +168,7 @@ extern unsigned long _ebase_address[];
 
 	/* Setup EBase. */
 	_CP0_SET_EBASE( ( unsigned long ) _ebase_address );
-	
+
 	/* Space vectors by 0x20 bytes. */
 	_CP0_XCH_INTCTL( 0x20 );
 
@@ -181,7 +183,7 @@ extern unsigned long _ebase_address[];
 
 	/* Set MVEC bit. */
 	INTCONbits.MVEC = 1;
-	
+
 	/* Finally enable interrupts again. */
 	ulStatus |= hwGLOBAL_INTERRUPT_BIT;
 	_CP0_SET_STATUS( ulStatus );
@@ -190,18 +192,7 @@ extern unsigned long _ebase_address[];
 
 static void prvConfigurePeripheralBus( void )
 {
-unsigned long ulDMAStatus;
 __OSCCONbits_t xOSCCONBits;
-
-	/* Unlock after suspending. */
-	ulDMAStatus = DMACONbits.SUSPEND;
-	if( ulDMAStatus == 0 )
-	{
-		DMACONSET = _DMACON_SUSPEND_MASK;
-
-		/* Wait until actually suspended. */
-		while( DMACONbits.SUSPEND == 0 );
-	}
 
 	SYSKEY = 0;
 	SYSKEY = hwUNLOCK_KEY_0;
@@ -220,12 +211,6 @@ __OSCCONbits_t xOSCCONBits;
 
 	/* Lock again. */
 	SYSKEY = hwLOCK_KEY;
-
-	/* Resume DMA activity. */
-	if( ulDMAStatus == 0 )
-	{
-		DMACONCLR=_DMACON_SUSPEND_MASK;
-	}
 }
 /*-----------------------------------------------------------*/
 
