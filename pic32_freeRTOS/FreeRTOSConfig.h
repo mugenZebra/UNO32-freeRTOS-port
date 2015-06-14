@@ -10,31 +10,31 @@
     the terms of the GNU General Public License (version 2) as published by the
     Free Software Foundation >>!AND MODIFIED BY!<< the FreeRTOS exception.
 
-    ***************************************************************************
+ ***************************************************************************
     >>!   NOTE: The modification to the GPL is included to allow you to     !<<
     >>!   distribute a combined work that includes FreeRTOS without being   !<<
     >>!   obliged to provide the source code for proprietary components     !<<
     >>!   outside of the FreeRTOS kernel.                                   !<<
-    ***************************************************************************
+ ***************************************************************************
 
     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
     FOR A PARTICULAR PURPOSE.  Full license text is available on the following
     link: http://www.freertos.org/a00114.html
 
-    ***************************************************************************
-     *                                                                       *
-     *    FreeRTOS provides completely free yet professionally developed,    *
-     *    robust, strictly quality controlled, supported, and cross          *
-     *    platform software that is more than just the market leader, it     *
-     *    is the industry's de facto standard.                               *
-     *                                                                       *
-     *    Help yourself get started quickly while simultaneously helping     *
-     *    to support the FreeRTOS project by purchasing a FreeRTOS           *
-     *    tutorial book, reference manual, or both:                          *
-     *    http://www.FreeRTOS.org/Documentation                              *
-     *                                                                       *
-    ***************************************************************************
+ ***************************************************************************
+ *                                                                       *
+ *    FreeRTOS provides completely free yet professionally developed,    *
+ *    robust, strictly quality controlled, supported, and cross          *
+ *    platform software that is more than just the market leader, it     *
+ *    is the industry's de facto standard.                               *
+ *                                                                       *
+ *    Help yourself get started quickly while simultaneously helping     *
+ *    to support the FreeRTOS project by purchasing a FreeRTOS           *
+ *    tutorial book, reference manual, or both:                          *
+ *    http://www.FreeRTOS.org/Documentation                              *
+ *                                                                       *
+ ***************************************************************************
 
     http://www.FreeRTOS.org/FAQHelp.html - Having a problem?  Start by reading
     the FAQ page "My application does not run, what could be wrong?".  Have you
@@ -65,7 +65,7 @@
     mission critical applications that require provable dependability.
 
     1 tab == 4 spaces!
-*/
+ */
 
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
@@ -133,8 +133,8 @@ to exclude the API function. */
 
 /* Prevent C specific syntax being included in assembly files. */
 #ifndef __LANGUAGE_ASSEMBLY
-	void vAssertCalled( const char *pcFileName, unsigned long ulLine );
-	#define configASSERT( x ) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
+void vAssertCalled(const char *pcFileName, unsigned long ulLine);
+#define configASSERT( x ) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
 #endif
 
 /* The priority at which the tick interrupt runs.  This should probably be

@@ -10,31 +10,31 @@
     the terms of the GNU General Public License (version 2) as published by the
     Free Software Foundation >>!AND MODIFIED BY!<< the FreeRTOS exception.
 
-    ***************************************************************************
+ ***************************************************************************
     >>!   NOTE: The modification to the GPL is included to allow you to     !<<
     >>!   distribute a combined work that includes FreeRTOS without being   !<<
     >>!   obliged to provide the source code for proprietary components     !<<
     >>!   outside of the FreeRTOS kernel.                                   !<<
-    ***************************************************************************
+ ***************************************************************************
 
     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
     FOR A PARTICULAR PURPOSE.  Full license text is available on the following
     link: http://www.freertos.org/a00114.html
 
-    ***************************************************************************
-     *                                                                       *
-     *    FreeRTOS provides completely free yet professionally developed,    *
-     *    robust, strictly quality controlled, supported, and cross          *
-     *    platform software that is more than just the market leader, it     *
-     *    is the industry's de facto standard.                               *
-     *                                                                       *
-     *    Help yourself get started quickly while simultaneously helping     *
-     *    to support the FreeRTOS project by purchasing a FreeRTOS           *
-     *    tutorial book, reference manual, or both:                          *
-     *    http://www.FreeRTOS.org/Documentation                              *
-     *                                                                       *
-    ***************************************************************************
+ ***************************************************************************
+ *                                                                       *
+ *    FreeRTOS provides completely free yet professionally developed,    *
+ *    robust, strictly quality controlled, supported, and cross          *
+ *    platform software that is more than just the market leader, it     *
+ *    is the industry's de facto standard.                               *
+ *                                                                       *
+ *    Help yourself get started quickly while simultaneously helping     *
+ *    to support the FreeRTOS project by purchasing a FreeRTOS           *
+ *    tutorial book, reference manual, or both:                          *
+ *    http://www.FreeRTOS.org/Documentation                              *
+ *                                                                       *
+ ***************************************************************************
 
     http://www.FreeRTOS.org/FAQHelp.html - Having a problem?  Start by reading
     the FAQ page "My application does not run, what could be wrong?".  Have you
@@ -65,7 +65,7 @@
     mission critical applications that require provable dependability.
 
     1 tab == 4 spaces!
-*/
+ */
 
 /******************************************************************************
  * NOTE 1:  This project provides two demo applications.  A simple blinky style
@@ -199,11 +199,11 @@ standard demo and the LED to be toggle by the check task.  The starter kit only
 has three LEDs so when the demo is configured to run on the starter kit there
 is one less flash timer so the check task can use the third LED. */
 #ifdef PIC32_STARTER_KIT
-	#define mainNUM_FLASH_TIMER_LEDS			( 2 )
-	#define mainCHECK_LED						( 2 )
+#define mainNUM_FLASH_TIMER_LEDS			( 2 )
+#define mainCHECK_LED						( 2 )
 #else
-	#define mainNUM_FLASH_TIMER_LEDS			( 3 )
-	#define mainCHECK_LED						( 7 )
+#define mainNUM_FLASH_TIMER_LEDS			( 3 )
+#define mainCHECK_LED						( 7 )
 #endif
 
 /*-----------------------------------------------------------*/
@@ -211,7 +211,7 @@ is one less flash timer so the check task can use the third LED. */
 /*
  * The check timer callback function, as described at the top of this file.
  */
-static void prvCheckTimerCallback( TimerHandle_t xTimer );
+static void prvCheckTimerCallback(TimerHandle_t xTimer);
 
 /*
  * It is important to ensure the high frequency timer test does not start before
@@ -220,7 +220,7 @@ static void prvCheckTimerCallback( TimerHandle_t xTimer );
  * executing.  A one-shot timer is used, so the callback function will only
  * execute once (unless it is manually reset/restarted).
  */
-static void prvSetupHighFrequencyTimerTest( TimerHandle_t xTimer );
+static void prvSetupHighFrequencyTimerTest(TimerHandle_t xTimer);
 
 /*
  * Tasks that test the context switch mechanism by filling the processor
@@ -229,8 +229,8 @@ static void prvSetupHighFrequencyTimerTest( TimerHandle_t xTimer );
  * in and out between setting the register values and checking the register
  * values.
  */
-static void prvRegTestTask1( void *pvParameters );
-static void prvRegTestTask2( void *pvParameters );
+static void prvRegTestTask1(void *pvParameters);
+static void prvRegTestTask2(void *pvParameters);
 
 /*-----------------------------------------------------------*/
 
@@ -247,193 +247,178 @@ volatile unsigned long ulRegTest1Cycles = 0, ulRegTest2Cycles = 0;
 /*
  * Create the demo tasks then start the scheduler.
  */
-int main_full( void )
+int main_full(void)
 {
-TimerHandle_t xTimer = NULL;
+    TimerHandle_t xTimer = NULL;
 
-	/* Create the LCD task - this returns the queue to use when writing
-	messages to the LCD. */
-	xLCDQueue = xStartLCDTask();
+    /* Create the LCD task - this returns the queue to use when writing
+    messages to the LCD. */
+    xLCDQueue = xStartLCDTask();
 
-	/* Create all the other standard demo tasks. */
-	vStartLEDFlashTimers( mainNUM_FLASH_TIMER_LEDS );
+    /* Create all the other standard demo tasks. */
+    vStartLEDFlashTimers(mainNUM_FLASH_TIMER_LEDS);
     vCreateBlockTimeTasks();
-    vStartSemaphoreTasks( mainSEM_TEST_PRIORITY );
-    vStartGenericQueueTasks( mainGEN_QUEUE_TASK_PRIORITY );
+    vStartSemaphoreTasks(mainSEM_TEST_PRIORITY);
+    vStartGenericQueueTasks(mainGEN_QUEUE_TASK_PRIORITY);
     vStartQueuePeekTasks();
-	vStartInterruptQueueTasks();
+    vStartInterruptQueueTasks();
 
-	/* Create the tasks defined within this file. */
-	xTaskCreate( prvRegTestTask1, "Reg1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate( prvRegTestTask2, "Reg2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
+    /* Create the tasks defined within this file. */
+    xTaskCreate(prvRegTestTask1, "Reg1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(prvRegTestTask2, "Reg2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
 
     /* The PIC32MX795 uses an 8 deep fifo where TX interrupts are asserted
-	whilst the TX buffer is empty.  This causes an issue with the test driver so
-	it is not used in this demo */
-	#if !defined(__32MX795F512L__)
-		vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED );
-	#endif
+        whilst the TX buffer is empty.  This causes an issue with the test driver so
+        it is not used in this demo */
+#if !defined(__32MX795F512L__)
+    vAltStartComTestTasks(mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED);
+#endif
 
-	/* Create the software timer that performs the 'check' functionality, as
-	described at the top of this file. */
-	xTimer = xTimerCreate( 	"CheckTimer",/* A text name, purely to help debugging. */
-							( mainCHECK_TIMER_PERIOD_MS ),		/* The timer period, in this case 3000ms (3s). */
-							pdTRUE,								/* This is an auto-reload timer, so xAutoReload is set to pdTRUE. */
-							( void * ) 0,						/* The ID is not used, so can be set to anything. */
-							prvCheckTimerCallback				/* The callback function that inspects the status of all the other tasks. */
-						);
+    /* Create the software timer that performs the 'check' functionality, as
+    described at the top of this file. */
+    xTimer = xTimerCreate("CheckTimer", /* A text name, purely to help debugging. */
+            (mainCHECK_TIMER_PERIOD_MS), /* The timer period, in this case 3000ms (3s). */
+            pdTRUE, /* This is an auto-reload timer, so xAutoReload is set to pdTRUE. */
+            (void *) 0, /* The ID is not used, so can be set to anything. */
+            prvCheckTimerCallback /* The callback function that inspects the status of all the other tasks. */
+            );
 
-	if( xTimer != NULL )
-	{
-		xTimerStart( xTimer, mainDONT_BLOCK );
-	}
+    if (xTimer != NULL) {
+        xTimerStart(xTimer, mainDONT_BLOCK);
+    }
 
-	/* A software timer is also used to start the high frequency timer test.
-	This is to ensure the test does not start before the kernel.  This time a
-	one shot software timer is used. */
-	xTimer = xTimerCreate( "HighHzTimerSetup", 1, pdFALSE, ( void * ) 0, prvSetupHighFrequencyTimerTest );
-	if( xTimer != NULL )
-	{
-		xTimerStart( xTimer, mainDONT_BLOCK );
-	}
+    /* A software timer is also used to start the high frequency timer test.
+    This is to ensure the test does not start before the kernel.  This time a
+    one shot software timer is used. */
+    xTimer = xTimerCreate("HighHzTimerSetup", 1, pdFALSE, (void *) 0, prvSetupHighFrequencyTimerTest);
+    if (xTimer != NULL) {
+        xTimerStart(xTimer, mainDONT_BLOCK);
+    }
 
-	/* Finally start the scheduler. */
-	vTaskStartScheduler();
+    /* Finally start the scheduler. */
+    vTaskStartScheduler();
 
-	/* If all is well, the scheduler will now be running, and the following line
-	will never be reached.  If the following line does execute, then there was
-	insufficient FreeRTOS heap memory available for the idle and/or timer tasks
-	to be created.  See the memory management section on the FreeRTOS web site
-	for more details. */
-	for( ;; );
+    /* If all is well, the scheduler will now be running, and the following line
+    will never be reached.  If the following line does execute, then there was
+    insufficient FreeRTOS heap memory available for the idle and/or timer tasks
+    to be created.  See the memory management section on the FreeRTOS web site
+    for more details. */
+    for (;;);
 }
+
 /*-----------------------------------------------------------*/
 
-static void prvRegTestTask1( void *pvParameters )
+static void prvRegTestTask1(void *pvParameters)
 {
-extern void vRegTest1( volatile unsigned long * );
+    extern void vRegTest1(volatile unsigned long *);
 
-	/* Avoid compiler warnings. */
-	( void ) pvParameters;
+    /* Avoid compiler warnings. */
+    (void) pvParameters;
 
-	/* Pass the address of the RegTest1 loop counter into the test function,
-	which is necessarily implemented in assembler. */
-	vRegTest1( &ulRegTest1Cycles );
+    /* Pass the address of the RegTest1 loop counter into the test function,
+    which is necessarily implemented in assembler. */
+    vRegTest1(&ulRegTest1Cycles);
 
-	/* vRegTest1 should never exit! */
-	vTaskDelete( NULL );
+    /* vRegTest1 should never exit! */
+    vTaskDelete(NULL);
 }
+
 /*-----------------------------------------------------------*/
 
-static void prvRegTestTask2( void *pvParameters )
+static void prvRegTestTask2(void *pvParameters)
 {
-extern void vRegTest2( volatile unsigned long * );
+    extern void vRegTest2(volatile unsigned long *);
 
-	/* Avoid compiler warnings. */
-	( void ) pvParameters;
+    /* Avoid compiler warnings. */
+    (void) pvParameters;
 
-	/* Pass the address of the RegTest2 loop counter into the test function,
-	which is necessarily implemented in assembler. */
-	vRegTest2( &ulRegTest2Cycles );
+    /* Pass the address of the RegTest2 loop counter into the test function,
+    which is necessarily implemented in assembler. */
+    vRegTest2(&ulRegTest2Cycles);
 
-	/* vRegTest1 should never exit! */
-	vTaskDelete( NULL );
+    /* vRegTest1 should never exit! */
+    vTaskDelete(NULL);
 }
+
 /*-----------------------------------------------------------*/
 
-static void prvCheckTimerCallback( TimerHandle_t xTimer )
+static void prvCheckTimerCallback(TimerHandle_t xTimer)
 {
-static long lChangedTimerPeriodAlready = pdFALSE;
-static unsigned long ulLastRegTest1Value = 0, ulLastRegTest2Value = 0;
+    static long lChangedTimerPeriodAlready = pdFALSE;
+    static unsigned long ulLastRegTest1Value = 0, ulLastRegTest2Value = 0;
 
-/* Buffer into which the high frequency timer count is written as a string. */
-static char cStringBuffer[ mainMAX_STRING_LENGTH ];
+    /* Buffer into which the high frequency timer count is written as a string. */
+    static char cStringBuffer[ mainMAX_STRING_LENGTH ];
 
-/* The count of the high frequency timer interrupts. */
-extern unsigned long ulHighFrequencyTimerInterrupts;
-static xLCDMessage xMessage = { ( 200 / portTICK_PERIOD_MS ), cStringBuffer };
+    /* The count of the high frequency timer interrupts. */
+    extern unsigned long ulHighFrequencyTimerInterrupts;
+    static xLCDMessage xMessage = {(200 / portTICK_PERIOD_MS), cStringBuffer};
 
-	/* Check that the register test 1 task is still running. */
-	if( ulLastRegTest1Value == ulRegTest1Cycles )
-	{
-		xMessage.pcMessage = "Error: Reg test2";
-	}
-	ulLastRegTest1Value = ulRegTest1Cycles;
-
-
-	/* Check that the register test 2 task is still running. */
-	if( ulLastRegTest2Value == ulRegTest2Cycles )
-	{
-		xMessage.pcMessage = "Error: Reg test3";
-	}
-	ulLastRegTest2Value = ulRegTest2Cycles;
+    /* Check that the register test 1 task is still running. */
+    if (ulLastRegTest1Value == ulRegTest1Cycles) {
+        xMessage.pcMessage = "Error: Reg test2";
+    }
+    ulLastRegTest1Value = ulRegTest1Cycles;
 
 
-	/* Have any of the standard demo tasks detected an error in their
-	operation? */
-	if( xAreGenericQueueTasksStillRunning() != pdTRUE )
-	{
-		xMessage.pcMessage = "Error: Gen Q";
-	}
-	else if( xAreQueuePeekTasksStillRunning() != pdTRUE )
-	{
-		xMessage.pcMessage = "Error: Q Peek";
-	}
-	else if( xAreBlockTimeTestTasksStillRunning() != pdTRUE )
-	{
-		xMessage.pcMessage = "Error: Blck time";
-	}
-	else if( xAreSemaphoreTasksStillRunning() != pdTRUE )
-	{
-		xMessage.pcMessage = "Error: Sem test";
-	}
-	else if( xAreIntQueueTasksStillRunning() != pdTRUE )
-	{
-		xMessage.pcMessage = "Error: Int queue";
-	}
-	#if !defined(__32MX795F512L__)
-		else if( xAreComTestTasksStillRunning() != pdTRUE )
-		{
-			xMessage.pcMessage = "Error: COM test";
-		}
-	#endif
+    /* Check that the register test 2 task is still running. */
+    if (ulLastRegTest2Value == ulRegTest2Cycles) {
+        xMessage.pcMessage = "Error: Reg test3";
+    }
+    ulLastRegTest2Value = ulRegTest2Cycles;
 
-	if( xMessage.pcMessage != cStringBuffer )
-	{
-		/* An error string has been logged.  If the timer period has not yet
-		been changed it should be changed now.  Increasing the frequency of the
-		LED gives visual feedback of the error status (although it is written
-		to the LCD too!). */
-		if( lChangedTimerPeriodAlready == pdFALSE )
-		{
-			lChangedTimerPeriodAlready = pdTRUE;
 
-			/* This call to xTimerChangePeriod() uses a zero block time.
-			Functions called from inside of a timer callback function must
-			*never* attempt	to block as to do so could impact other software
-			timers. */
-			xTimerChangePeriod( xTimer, ( mainERROR_CHECK_TIMER_PERIOD_MS ), mainDONT_BLOCK );
-		}
-	}
-	else
-	{
-		/* Write the ulHighFrequencyTimerInterrupts value to the string
-		buffer.  It will only be displayed if no errors have been detected. */
-		sprintf( cStringBuffer, "Pass %u", ( unsigned int ) ulHighFrequencyTimerInterrupts );
-	}
+    /* Have any of the standard demo tasks detected an error in their
+    operation? */
+    if (xAreGenericQueueTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: Gen Q";
+    } else if (xAreQueuePeekTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: Q Peek";
+    } else if (xAreBlockTimeTestTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: Blck time";
+    } else if (xAreSemaphoreTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: Sem test";
+    } else if (xAreIntQueueTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: Int queue";
+    }#if !defined(__32MX795F512L__)
+    else if (xAreComTestTasksStillRunning() != pdTRUE) {
+        xMessage.pcMessage = "Error: COM test";
+    }
+#endif
 
-	/* Send the status message to the LCD task for display on the LCD.  This is
-	a timer callback function, so the queue send function *must not* block. */
-	xQueueSend( xLCDQueue, &xMessage, mainDONT_BLOCK );
-	vParTestToggleLED( mainCHECK_LED );
+    if (xMessage.pcMessage != cStringBuffer) {
+        /* An error string has been logged.  If the timer period has not yet
+        been changed it should be changed now.  Increasing the frequency of the
+        LED gives visual feedback of the error status (although it is written
+        to the LCD too!). */
+        if (lChangedTimerPeriodAlready == pdFALSE) {
+            lChangedTimerPeriodAlready = pdTRUE;
+
+            /* This call to xTimerChangePeriod() uses a zero block time.
+            Functions called from inside of a timer callback function must
+             *never* attempt	to block as to do so could impact other software
+            timers. */
+            xTimerChangePeriod(xTimer, (mainERROR_CHECK_TIMER_PERIOD_MS), mainDONT_BLOCK);
+        }
+    } else {
+        /* Write the ulHighFrequencyTimerInterrupts value to the string
+        buffer.  It will only be displayed if no errors have been detected. */
+        sprintf(cStringBuffer, "Pass %u", (unsigned int) ulHighFrequencyTimerInterrupts);
+    }
+
+    /* Send the status message to the LCD task for display on the LCD.  This is
+    a timer callback function, so the queue send function *must not* block. */
+    xQueueSend(xLCDQueue, &xMessage, mainDONT_BLOCK);
+    vParTestToggleLED(mainCHECK_LED);
 }
+
 /*-----------------------------------------------------------*/
 
-static void prvSetupHighFrequencyTimerTest( TimerHandle_t xTimer )
+static void prvSetupHighFrequencyTimerTest(TimerHandle_t xTimer)
 {
-	/* Setup the high frequency, high priority, timer test.  It is setup in this
-	software timer callback to ensure it does not start before the kernel does.
-	This is a one shot timer - so the setup routine will only be executed once. */
-	vSetupTimerTest( mainTEST_INTERRUPT_FREQUENCY );
+    /* Setup the high frequency, high priority, timer test.  It is setup in this
+    software timer callback to ensure it does not start before the kernel does.
+    This is a one shot timer - so the setup routine will only be executed once. */
+    vSetupTimerTest(mainTEST_INTERRUPT_FREQUENCY);
 }
 

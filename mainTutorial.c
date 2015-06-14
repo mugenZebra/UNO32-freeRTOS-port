@@ -92,64 +92,28 @@
 /* Hardware specific includes. */
 #include "pic32_freeRTOS/ConfigPerformance.h"
 
-/* Core configuratin fuse settings */
-#pragma config FNOSC    = PRIPLL                        // Oscillator selection
-#pragma config POSCMOD  = XT                            // Primary oscillator mode
-#pragma config FPLLIDIV = DIV_2                         // PLL input divider
-#pragma config FPLLMUL  = MUL_20                        // PLL multiplier
-#pragma config FPLLODIV = DIV_1                         // PLL output divider
-#pragma config FPBDIV   = DIV_2                         // Peripheral bus clock divider
-#pragma config FSOSCEN  = ON                            // Secondary oscillator enable
-
-//*    Clock control settings
-#pragma config IESO     = OFF                           // Internal/external clock switchover
-#pragma config FCKSM    = CSDCMD                        // Clock switching (CSx)/Clock monitor (CMx)
-#pragma config OSCIOFNC = OFF                           // Clock output on OSCO pin enable
-
-//*    Other Peripheral Device settings
-#pragma config FWDTEN   = OFF                           // Watchdog timer enable
-#pragma config WDTPS    = PS1024                       // Watchdog timer postscaler
-
-//*    Code Protection settings
-#pragma config CP       = OFF                           // Code protection
-#pragma config BWP      = OFF                           // Boot flash write protect
-#pragma config PWP      = OFF                           // Program flash write protect
-
-//*    Debug settings
-#pragma config ICESEL   = ICS_PGx2                      // ICE pin selection
-
-
-/*-----------------------------------------------------------*/
-
-/* Set mainCREATE_SIMPLE_BLINKY_DEMO_ONLY to one to run the simple blinky demo,
-or 0 to run the more comprehensive test and demo application. */
-#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY	0
-
-/*-----------------------------------------------------------*/
-
+#pragma config FPLLMUL = MUL_20, FPLLIDIV = DIV_2, FPLLODIV = DIV_1, FWDTEN = OFF
+#pragma config POSCMOD = HS, FNOSC = PRIPLL, FPBDIV = DIV_2
+#pragma config CP = OFF, BWP = OFF, PWP = OFF
 /*
  * Set up the hardware ready to run this demo.
  */
 static void prvSetupHardware( void );
 
-/*
- * main_blinky() is used when mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is set to 1.
- * main_full() is used when mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is set to 0.
- */
-extern void main_blinky( void );
-extern void main_full( void );
-
 /*-----------------------------------------------------------*/
+static const char *pcTextForTask1 = "Task 1 is running\n";
+static const char *pcTextForTask2 = "Task 2 is running\n";
 
 void vTask1(void *pvParameters)
 {
-    const char *pcTaskName = "Task 1 is running\n";
+    const char *pcTaskName = (char *) pvParameters;
+  
     volatile unsigned long ul;
     for (;;) {
-        //printf(pcTaskName);
+        printf(pcTaskName);
         WRITE_LOW(F, 0);
-        //WRITE_HIGH(G, 6);
-        for (ul=0; ul < 10000000; ul++) {
+        WRITE_HIGH(G, 6);
+        for (ul=0; ul < 0xFFFF; ul++) {
             
         }
     }
@@ -157,13 +121,13 @@ void vTask1(void *pvParameters)
 
 void vTask2 ( void *pvParameters )
 {
-    const char *pcTaskName = "Task 2 is running\n";
+    const char *pcTaskName = (char *) pvParameters;
     volatile unsigned long ul;
     for (;;) {
-        //printf( pcTaskName );
+        printf( pcTaskName );
         WRITE_LOW(G,6);
-        //WRITE_HIGH(F, 0);
-        for (ul = 0; ul < 10000000; ul++) {
+        WRITE_HIGH(F, 0);
+        for (ul = 0; ul < 0xFFFF; ul++) {
 
         }
     }
@@ -171,17 +135,24 @@ void vTask2 ( void *pvParameters )
 
 int main( void )
 {
-    //INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
-    //INTEnableInterrupts();
-    //SERIAL_Init();
-    //printf("program started\n");
+    prvSetupHardware();
+
+    // set up serial
+    INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
+    INTEnableInterrupts();
+    SERIAL_Init();
+    printf("program started\n");
+
+    // set up LEDs
     SET_OUTPUT_PIN(G, 6);
-    WRITE_HIGH(G, 6);
+    WRITE_LOW(G, 6);
     SET_OUTPUT_PIN(F, 0);
-    WRITE_HIGH(F, 0);
-    xTaskCreate(vTask1, "Task 1", 200, NULL, 1, NULL);
-    xTaskCreate(vTask2, "Task 2", 200, NULL, 1, NULL);
-    //printf("tasks created\n");
+    WRITE_LOW(F, 0);
+
+    // tutorials
+    xTaskCreate(vTask1, "Task 1", 200, (void *) pcTextForTask1, 0, NULL);
+    xTaskCreate(vTask2, "Task 2", 200, (void *) pcTextForTask2, 2, NULL);
+
     vTaskStartScheduler();
 
     for(;;);
@@ -191,10 +162,10 @@ int main( void )
 static void prvSetupHardware( void )
 {
 	/* Configure the hardware for maximum performance. */
-	//vHardwareConfigurePerformance();
+	vHardwareConfigurePerformance();
 
 	/* Setup to use the external interrupt controller. */
-	//vHardwareUseMultiVectoredInterrupts();
+	vHardwareUseMultiVectoredInterrupts();
 
 	portDISABLE_INTERRUPTS();
 
